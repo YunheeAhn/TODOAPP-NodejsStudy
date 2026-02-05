@@ -1,0 +1,1 @@
+web: cd TODOAPP-BE && npm install && npm start
