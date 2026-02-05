@@ -18,6 +18,11 @@ const indexRouter = require("./routes/index");
 //*** express 앱 생성 ***//
 const app = express();
 
+//*** 환경변수 설정 ***//
+require("dotenv").config();
+const MONGODB_URI_PROD = process.env.MONGODB_URI_PROD;
+// console.log("데이터 베이스 주소", MONGODB_URI_PROD);
+
 //*** body-parser 미들웨어 설정 ***//
 app.use(bodyParser.json());
 
@@ -28,7 +33,9 @@ app.use(cors());
 app.use("/api", indexRouter); // /api/tasks 로 라우팅됨
 
 //*** mongoose 연결 ***//
-const mongoURI = "mongodb://localhost:27017/TodoApp";
+// const mongoURI = "mongodb://localhost:27017/TodoApp";
+const mongoURI = MONGODB_URI_PROD;
+
 mongoose
   .connect(mongoURI)
   .then(() => {
