@@ -6,6 +6,9 @@ const express = require("express");
 //*** mongoose 세팅 ***//
 const mongoose = require("mongoose");
 
+//*** cors 세팅 ***//
+const cors = require("cors");
+
 //*** body-parser 세팅 ***//
 const bodyParser = require("body-parser");
 
@@ -17,6 +20,9 @@ const app = express();
 
 //*** body-parser 미들웨어 설정 ***//
 app.use(bodyParser.json());
+
+//*** CORS 미들웨어 설정 ***//
+app.use(cors());
 
 //*** 라우터 설정 ***//
 app.use("/api", indexRouter); // /api/tasks 로 라우팅됨
