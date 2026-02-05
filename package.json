@@ -1,0 +1,8 @@
+{
+  "name": "todoapp-root",
+  "private": true,
+  "scripts": {
+    "start": "cd TODOAPP-BE && npm start",
+    "heroku-postbuild": "cd TODOAPP-BE && npm install --omit=dev"
+  }
+}
