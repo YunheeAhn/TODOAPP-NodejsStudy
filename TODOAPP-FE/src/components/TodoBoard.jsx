@@ -2,9 +2,11 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import Typography from "@mui/material/Typography";
 
+import { styled } from "@mui/material/styles";
+
 const TodoBoard = ({ todoList = [], showSnack, SNACK, completeTask, deleteTask }) => {
   return (
-    <div>
+    <BoardWrap>
       {todoList.length > 0 ? (
         todoList.map((todo) => (
           <TodoItem
@@ -21,8 +23,13 @@ const TodoBoard = ({ todoList = [], showSnack, SNACK, completeTask, deleteTask }
           아직 등록 된 할 일이 없습니다.
         </Typography>
       )}
-    </div>
+    </BoardWrap>
   );
 };
 
 export default TodoBoard;
+
+const BoardWrap = styled("div")(() => ({
+  overflowY: "scroll",
+  height: "60vh",
+}));
