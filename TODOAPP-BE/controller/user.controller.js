@@ -65,7 +65,9 @@ userController.loginWithEmail = async (req, res) => {
         const token = user.generateAuthToken();
 
         // 성공 응답
-        res.status(200).json({ status: "success", user, token, message: "로그인에 성공 했습니다" });
+        return res
+          .status(200)
+          .json({ status: "success", user, token, message: "로그인에 성공 했습니다" });
       } else {
         throw new Error("잘못된 비밀번호 입니다.");
       }
