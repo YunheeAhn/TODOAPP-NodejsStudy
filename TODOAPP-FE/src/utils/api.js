@@ -21,12 +21,12 @@ api.interceptors.request.use(
 // 응답 인터셉터
 api.interceptors.response.use(
   (response) => {
-    console.log("Response:", response);
+    // console.log("Response:", response);
     return response;
   },
   function (error) {
     error = error.response.data;
-    console.log("RESPONSE ERROR", error);
+    // console.log("RESPONSE ERROR", error);
     return Promise.reject(error);
   },
 );
