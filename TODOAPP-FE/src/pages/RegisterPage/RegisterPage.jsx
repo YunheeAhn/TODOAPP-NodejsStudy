@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Typography, TextField, Button } from "@mui/material";
-import { ContentsWrap } from "../TodoPage/TodoPage";
+import { Typography, TextField, Button, styled } from "@mui/material";
+import { ContentsWrap, MainTitle } from "../TodoPage/TodoPage";
 import AppSnackbar from "../../components/AppSnackBar";
 import useAppSnackbar from "../../hooks/useAppSnackBar";
 import api from "../../utils/api";
@@ -53,46 +53,50 @@ const RegisterPage = () => {
 
   return (
     <ContentsWrap>
-      <div>
-        <Typography variant="h1">회원가입</Typography>
+      <Inner>
+        <MainTitle variant="h1" fontWeight={700}>
+          회원가입
+        </MainTitle>
 
-        <form onSubmit={registerHandler}>
+        <FormContainer onSubmit={registerHandler}>
           <TextField
-            label="Name"
-            placeholder="Name"
+            label="이름"
+            placeholder="이름을 입력해주세요"
             onChange={(event) => setName(event.target.value)}
             fullWidth
           />
 
           <TextField
             type="email"
-            label="Email address"
-            placeholder="Enter email"
+            label="이메일"
+            placeholder="이메일 주소를 입력해주세요"
             onChange={(event) => setEmail(event.target.value)}
             fullWidth
           />
 
           <TextField
             type="password"
-            label="Password"
-            placeholder="Password"
+            label="비밀번호"
+            placeholder="비밀번호를 입력해주세요"
             onChange={(event) => setPassword(event.target.value)}
             fullWidth
           />
 
           <TextField
             type="password"
-            label="re-enter the password"
-            placeholder="re-enter the password"
+            label="비밀번호 재입력"
+            placeholder="비밀번호를 한 번 더 입력해주세요"
             onChange={(event) => setConfirmPassword(event.target.value)}
             fullWidth
           />
 
-          <Button variant="contained" type="submit" fullWidth>
-            회원가입
-          </Button>
-        </form>
-      </div>
+          <ButtonWrap>
+            <Button variant="contained" type="submit" fullWidth>
+              회원가입하기
+            </Button>
+          </ButtonWrap>
+        </FormContainer>
+      </Inner>
 
       <AppSnackbar
         open={snack.open}
@@ -107,3 +111,36 @@ const RegisterPage = () => {
 export default RegisterPage;
 
 // 스타일드 컴포넌트
+
+export const Inner = styled("div")(({ theme }) => ({
+  padding: "20px",
+  backgroundColor: theme.palette.background.paper,
+  // height: "90%",
+  borderRadius: "15px",
+}));
+
+export const FormContainer = styled("form")(() => ({
+  display: "flex",
+  flexDirection: "column",
+  gap: "15px",
+}));
+
+export const ButtonWrap = styled("div")(({ theme }) => ({
+  display: "flex",
+  gap: "8px",
+  flexDirection: "column",
+  marginTop: "20px",
+
+  "& button": {
+    transition: "all .3s ease",
+    boxShadow: "none",
+    border: "1px solid transparent",
+
+    "&:hover": {
+      color: theme.palette.primary.main,
+      backgroundColor: theme.palette.common.white,
+      border: "1px solid" + theme.palette.primary.main,
+      boxShadow: "none",
+    },
+  },
+}));

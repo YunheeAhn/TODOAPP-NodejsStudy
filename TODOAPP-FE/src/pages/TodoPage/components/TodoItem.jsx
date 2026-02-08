@@ -60,10 +60,12 @@ const ButtonWrap = styled("div")(({ theme }) => ({
 
   "& button": {
     transition: "all .3s ease",
+    boxShadow: "none",
 
     "&:hover": {
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.common.white,
+      boxShadow: "none",
     },
   },
 }));

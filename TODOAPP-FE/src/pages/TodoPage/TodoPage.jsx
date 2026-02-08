@@ -170,7 +170,7 @@ const Inner = styled("div")(({ theme }) => ({
   borderRadius: "15px",
 }));
 
-const MainTitle = styled(Typography)(({ theme }) => ({
+export const MainTitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
   margin: "20px 0 40px 0",
   textAlign: "center",

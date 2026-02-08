@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Typography, TextField, Button, Stack } from "@mui/material";
-import { ContentsWrap } from "../TodoPage/TodoPage";
+import { Typography, TextField, Button, Stack, styled } from "@mui/material";
+import { ContentsWrap, MainTitle } from "../TodoPage/TodoPage";
 
 import AppSnackbar from "../../components/AppSnackBar";
 import useAppSnackbar from "../../hooks/useAppSnackBar";
 import api from "../../utils/api";
+import { FormContainer, Inner } from "../RegisterPage/RegisterPage";
+import { ButtonWrap } from "../RegisterPage/RegisterPage";
 
 const LoginPage = () => {
   // Snackbar 훅 사용
@@ -50,38 +52,43 @@ const LoginPage = () => {
 
   return (
     <ContentsWrap>
-      <div>
-        <Typography variant="h1">로그인</Typography>
+      <Inner>
+        <MainTitle variant="h1" fontWeight={700}>
+          로그인
+        </MainTitle>
 
-        <form onSubmit={loginHandler}>
+        <FormContainer onSubmit={loginHandler}>
           <TextField
             type="email"
-            label="Email address"
-            placeholder="Enter email"
+            label="이메일"
+            placeholder="이메일을 입력해주세요"
             onChange={(event) => setEmail(event.target.value)}
             fullWidth
           />
 
           <TextField
             type="password"
-            label="Password"
-            placeholder="Password"
+            label="비밀번호"
+            placeholder="비밀번호를 입력해주세요"
             onChange={(event) => setPassword(event.target.value)}
             fullWidth
           />
+          <ButtonWrap>
+            <Button variant="contained" color="primary" type="submit" fullWidth>
+              로그인하기
+            </Button>
 
-          <Button variant="contained" color="primary" type="submit" fullWidth>
-            Login
-          </Button>
-
-          <Typography variant="body1" sx={{ textAlign: "center" }}>
-            계정이 없다면?
-            <Typography component={Link} to="/register">
-              회원가입 하기
-            </Typography>
-          </Typography>
-        </form>
-      </div>
+            <TypoWrap>
+              <Typography variant="body1" sx={{ textAlign: "center" }}>
+                계정이 없다면?
+              </Typography>
+              <Typography component={Link} to="/register">
+                회원가입 하기
+              </Typography>
+            </TypoWrap>
+          </ButtonWrap>
+        </FormContainer>
+      </Inner>
 
       <AppSnackbar
         open={snack.open}
@@ -96,3 +103,17 @@ const LoginPage = () => {
 export default LoginPage;
 
 // 스타일드 컴포넌트
+const TypoWrap = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  gap: "5px",
+  color: theme.palette.text.secondary,
+
+  "& a": {
+    transition: "all .3s ease",
+    "&:hover": {
+      color: theme.palette.primary.main,
+      fontWeight: 700,
+    },
+  },
+}));
