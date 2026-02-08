@@ -22,13 +22,13 @@ userController.createUser = async (req, res) => {
     const existingUser = await User.findOne({ email: email });
 
     if (existingUser) {
-      throw new Error("Email already in use");
+      throw new Error("이미 가입한 이메일 입니다");
     }
 
     // 비밀번호 암호화
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-    console.log("암호화된 비밀번호:", hash);
+    // console.log("암호화된 비밀번호:", hash);
 
     // 새로운 유저 생성
     const newUser = new User({
@@ -41,7 +41,7 @@ userController.createUser = async (req, res) => {
     await newUser.save();
 
     // 성공 응답
-    res.status(200).json({ status: "success", message: "User created successfully" });
+    res.status(200).json({ status: "success", message: "회원가입에 성공 했습니다" });
   } catch (error) {
     // 에러 응답
     res.status(400).json({ status: "Failed", message: error.message });
@@ -65,12 +65,12 @@ userController.loginWithEmail = async (req, res) => {
         const token = user.generateAuthToken();
 
         // 성공 응답
-        res.status(200).json({ status: "success", user, token, message: "Login successful" });
+        res.status(200).json({ status: "success", user, token, message: "로그인에 성공 했습니다" });
       } else {
-        throw new Error("Invalid password");
+        throw new Error("잘못된 비밀번호 입니다.");
       }
     }
-    throw new Error("Invalid ID or password");
+    throw new Error("이메일 또는 비밀번호가 일치하지 않습니다");
   } catch (error) {
     // 에러 응답
     res.status(400).json({ status: "Failed", message: error.message });
