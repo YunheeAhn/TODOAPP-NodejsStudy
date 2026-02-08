@@ -152,7 +152,7 @@ const TodoPage = () => {
 export default TodoPage;
 
 // 스타일드 컴포넌트
-const ContentsWrap = styled("div")(() => ({
+export const ContentsWrap = styled("div")(() => ({
   height: "100vh",
   maxWidth: "720px",
   margin: "0 auto",
