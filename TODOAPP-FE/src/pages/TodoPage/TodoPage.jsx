@@ -51,8 +51,8 @@ const TodoPage = () => {
       } else {
         throw new Error("할 일 추가 실패");
       }
-    } catch (err) {
-      console.error("할 일 추가 실패:", err);
+    } catch (error) {
+      console.error("할 일 추가 실패:", error);
       showSnack(SNACK.ADD_FAIL, "error");
     }
   };
@@ -75,8 +75,8 @@ const TodoPage = () => {
       } else {
         throw new Error("할 일 완료 실패");
       }
-    } catch (err) {
-      console.error("할 일 완료 실패:", err);
+    } catch (error) {
+      console.error("할 일 완료 실패:", error);
       showSnack(SNACK.COMPLETE_FAIL, "error");
     }
   };
@@ -93,8 +93,8 @@ const TodoPage = () => {
       } else {
         throw new Error("할 일 삭제 실패");
       }
-    } catch (err) {
-      console.error("할 일 삭제 실패:", err);
+    } catch (error) {
+      console.error("할 일 삭제 실패:", error);
       showSnack(SNACK.DELETE_FAIL, "error");
     }
   };
