@@ -79,4 +79,26 @@ userController.loginWithEmail = async (req, res) => {
   }
 };
 
+// authController에서 토큰 유무 판단 한 후
+// 유저 객체 가져오기
+userController.getUser = async (req, res) => {
+  try {
+    // authController.authenticate에서 next로 보낸 userId 가져오기
+    const { userId } = req;
+    const user = await User.findById(userId);
+
+    // 만약 userId 가 없는 경우
+    if (!user) {
+      throw new Error("등록된 유저 정보를 찾을 수 없습니다.");
+    }
+
+    // userId가 있는 경우
+    res.status(200).json({ status: "success", user });
+  } catch (error) {
+    res.status(400).json({ status: "Failed", message: error.message });
+  }
+};
+
 module.exports = userController;
+
+// 미들웨어
