@@ -33,6 +33,9 @@ userSchema.methods.toJSON = function () {
   // user 객체를 JSON으로 변환할 때 민감한 정보 제거
   const userObject = this.toObject();
   delete userObject.password; // 비밀번호 정보 제거
+  delete userObject.updatedAt;
+  delete userObject.createdAt;
+  delete userObject.__v;
   return userObject;
 };
 
