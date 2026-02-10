@@ -7,6 +7,11 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: true, // 할 일 내용은 필수
     },
+    author: {
+      type: mongoose.Schema.Types.ObjectId, // User컬렉션의 id값을 타입으로 지정
+      required: true,
+      ref: "User", // User 컬렉션 참조
+    },
     isCompleted: {
       type: Boolean,
       required: true,

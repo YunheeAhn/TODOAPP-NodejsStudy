@@ -18,8 +18,10 @@ taskController.createTask = async (req, res) => {
 
     // 요청 바디에서 할 일 내용과 완료 여부 추출
     const { task, isCompleted } = req.body;
+    // auth.controller.js 에서 보낸 유저 id 미들웨어로 연결
+    const { userId } = req;
     // 새로운 할 일 인스턴스 생성
-    const newTask = new Task({ task, isCompleted });
+    const newTask = new Task({ task, isCompleted, author: userId });
     // 데이터베이스에 저장
     await newTask.save();
 

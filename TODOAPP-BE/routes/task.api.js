@@ -6,9 +6,10 @@ const router = express.Router();
 
 // task controller 불러오기
 const taskController = require("../controller/task.controller");
+const authController = require("../controller/auth.controller");
 
 // 할 일 생성 연결
-router.post("/", taskController.createTask);
+router.post("/", authController.authenticate, taskController.createTask);
 
 // 할 일 조회 연결
 router.get("/", taskController.getTask);
