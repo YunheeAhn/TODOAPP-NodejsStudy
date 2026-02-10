@@ -85,7 +85,7 @@ const IconWrap = styled("div", {
   display: "flex",
   gap: "5px",
   flexDirection: "row",
-  justifyContent: "center",
+  // justifyContent: "center",
   alignItems: "center",
   fontSize: "0.889rem",
   color: isCompleted ? theme.palette.text.secondary : theme.palette.text.primary,
