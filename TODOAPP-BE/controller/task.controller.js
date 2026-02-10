@@ -38,7 +38,7 @@ taskController.createTask = async (req, res) => {
 taskController.getTask = async (req, res) => {
   try {
     // 할 일 조회 로직
-    const taskList = await Task.find({}).select("-__v"); // __v 필드 제외
+    const taskList = await Task.find({}).populate("author").select("-__v"); // __v 필드 제외
 
     // 성공 응답 반환
     res
