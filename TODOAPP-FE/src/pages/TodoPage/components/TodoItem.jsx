@@ -2,13 +2,22 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import PersonIcon from "@mui/icons-material/Person";
 
 const TodoItem = ({ todo, completeTask, deleteTask }) => {
   return (
     <ItemWrap isCompleted={todo.isCompleted}>
-      <TaskText isCompleted={todo.isCompleted} variant="body1" fontWeight={400}>
-        {todo.task}
-      </TaskText>
+      <div>
+        <TaskText isCompleted={todo.isCompleted} variant="body1" fontWeight={400}>
+          {todo.task}
+        </TaskText>
+        {todo.author?.name ? (
+          <IconWrap isCompleted={todo.isCompleted}>
+            <PersonIcon />
+            {todo.author?.name}
+          </IconWrap>
+        ) : null}
+      </div>
       <ButtonWrap>
         <Button variant="outlined" onClick={() => deleteTask(todo._id)}>
           삭제
@@ -67,5 +76,22 @@ const ButtonWrap = styled("div")(({ theme }) => ({
       color: theme.palette.common.white,
       boxShadow: "none",
     },
+  },
+}));
+
+const IconWrap = styled("div", {
+  shouldForwardProp: (prop) => prop !== "isCompleted",
+})(({ theme, isCompleted }) => ({
+  display: "flex",
+  gap: "5px",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  fontSize: "0.889rem",
+  color: isCompleted ? theme.palette.text.secondary : theme.palette.text.primary,
+  marginTop: "5px",
+
+  "& svg": {
+    fontSize: "1rem",
   },
 }));

@@ -15,7 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const TodoPage = () => {
+const TodoPage = ({ logoutHandler }) => {
   // 할 일 목록 상태 관리
   const [todoList, setTodoList] = useState([]);
   // 할 일 추가 상태 관리
@@ -60,13 +60,13 @@ const TodoPage = () => {
   // 할 일 완료 처리 하는 함수
   const completeTask = async (id) => {
     try {
-      const taskdata = todoList.find((task) => task._id === id);
+      const taskData = todoList.find((task) => task._id === id);
 
       // 존재하지 않는 할 일 처리
-      if (!taskdata) {
+      if (!taskData) {
         throw new Error("할 일 데이터를 찾을 수 없습니다.");
       }
-      const response = await api.put(`/tasks/${id}`, { isCompleted: !taskdata.isCompleted });
+      const response = await api.put(`/tasks/${id}`, { isCompleted: !taskData.isCompleted });
 
       if (response.status === 200) {
         // 할 일 목록 갱신
@@ -99,9 +99,22 @@ const TodoPage = () => {
     }
   };
 
+  const handleLogout = () => {
+    showSnack("로그아웃 되었습니다", "success");
+
+    setTimeout(() => {
+      logoutHandler();
+    }, 500);
+  };
+
   return (
     <ContentsWrap>
       <Inner>
+        <LogoutButtonWrap>
+          <Button variant="outlined" color="primary" onClick={handleLogout}>
+            로그아웃
+          </Button>
+        </LogoutButtonWrap>
         <MainTitle variant="h1" fontWeight={700}>
           TODO LIST
         </MainTitle>
@@ -191,6 +204,22 @@ const TextWrap = styled("div")(({ theme }) => ({
       borderColor: theme.palette.primary.main,
       backgroundColor: theme.palette.background.paper,
       color: theme.palette.primary.main,
+      boxShadow: "none",
+    },
+  },
+}));
+
+const LogoutButtonWrap = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "flex-end",
+
+  "& Button": {
+    transition: "all .3s ease",
+    boxShadow: "none",
+
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white,
       boxShadow: "none",
     },
   },

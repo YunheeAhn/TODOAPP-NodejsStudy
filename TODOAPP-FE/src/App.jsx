@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
@@ -15,6 +15,8 @@ function App() {
 
   // user로그인 여부에 따른 Private Route
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
 
   const getUser = async () => {
     // 토큰을 통해 유저 정보 가져오기
@@ -32,6 +34,7 @@ function App() {
     } catch (error) {
       // 토큰을 통해 유저 정보 가져오는 것 실패
       setUser(null);
+      throw new Error(error);
     }
   };
 
@@ -39,13 +42,23 @@ function App() {
     getUser();
   }, []);
 
+  // 로그아웃 함수
+  const logoutHandler = () => {
+    // 토큰 정보 삭제
+    sessionStorage.removeItem("token");
+    setUser(null);
+
+    // 로그인 페이지로 이동
+    navigate("/login");
+  };
+
   return (
     <Routes>
       <Route
         path="/"
         element={
           <PrivateRoute user={user}>
-            <TodoPage />
+            <TodoPage logoutHandler={logoutHandler} />
           </PrivateRoute>
         }
       />

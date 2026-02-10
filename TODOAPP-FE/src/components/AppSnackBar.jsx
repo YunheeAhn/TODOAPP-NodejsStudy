@@ -9,7 +9,7 @@ const AppSnackbar = ({
   severity = "success", // "success" | "error" | "info" | "warning"
   onClose,
   duration = 1200,
-  anchorOrigin = { vertical: "top", horizontal: "right" },
+  anchorOrigin = { vertical: "top", horizontal: "center" },
 }) => {
   return (
     <Snackbar

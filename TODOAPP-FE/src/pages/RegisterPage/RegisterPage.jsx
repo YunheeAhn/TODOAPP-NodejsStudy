@@ -39,7 +39,9 @@ const RegisterPage = () => {
 
       // 로그인 페이지로 이동
       if (response.status == 200) {
-        navigate("/login");
+        setTimeout(() => {
+          navigate("/login");
+        }, 500);
       } else {
         throw new Error(response.data.error);
       }
