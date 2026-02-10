@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Typography, TextField, Button, Stack, styled } from "@mui/material";
 import { ContentsWrap, MainTitle } from "../TodoPage/TodoPage";
 
@@ -9,7 +9,7 @@ import api from "../../utils/api";
 import { FormContainer, Inner } from "../RegisterPage/RegisterPage";
 import { ButtonWrap } from "../RegisterPage/RegisterPage";
 
-const LoginPage = () => {
+const LoginPage = ({ user, setUser }) => {
   // Snackbar 훅 사용
   const { snack, showSnack, closeSnack } = useAppSnackbar();
 
@@ -18,7 +18,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   // 유저 정보 상태 관리
-  const [user, setUser] = useState("");
+  // const [user, setUser] = useState("");
 
   // 네비게이션
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const LoginPage = () => {
     event.preventDefault();
     try {
       const response = await api.post("/user/login", { email, password });
-      console.log("로그인", response);
+      // console.log("로그인", response);
 
       if (response.status === 200) {
         showSnack("로그인에 성공 했습니다", "success");
@@ -49,6 +49,13 @@ const LoginPage = () => {
       showSnack(serverMsg || error?.message || "로그인에 실패했습니다.", "error");
     }
   };
+
+  // 토큰 정보 가져오기 성공해서
+  // 유저여부 확인 (app.jsx / getUser 함수)
+  // 성공시 : 투두 페이지로 이동
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <ContentsWrap>
